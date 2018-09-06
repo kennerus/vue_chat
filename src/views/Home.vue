@@ -1,18 +1,35 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <div id="app">
+        <div class="container">
+            <div class="row mt-5">
+                <div class="col-md-3">
+                    <Nav/>
+                </div>
+                <div class="col-md-6 offset-md-1">
+                    <Chat/>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue';
+    // @ is an alias to /src
+    import Chat from '../components/Chat.vue';
+    import Nav from '../components/Nav.vue';
 
-export default {
-  name: 'home',
-  components: {
-    HelloWorld,
-  },
-};
+    export default {
+        name: 'home',
+        components: {
+            Chat,
+            Nav
+        },
+        data() {},
+        methods: {
+            connect() {
+
+            }
+        },
+        mounted() {}
+    };
 </script>
