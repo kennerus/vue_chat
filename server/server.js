@@ -12,14 +12,19 @@ function getUser(id) {
 
 io.on('connection', function (socket) {
 
-  socket.on('TAKE_NAME', function (data) {
+  socket.on('CONNECT', (data) => {
     const user = {
       name: data.user,
       id: socket.id
     };
     users.push(user);
-    io.emit('MESSAGE', {message: `${data.user} присоединился к чату!`});
+    socket.emit('CONNECT', user);
+    io.emit('NEW_CONNECT', {
+      message: `${data.user} присоединился к чату!`,
+      users
+    });
   });
+
 
   socket.on('TYPING', function (isUserTyping) {
     const user = getUser(socket.id);
@@ -33,8 +38,8 @@ io.on('connection', function (socket) {
   });
 
   socket.on('SEND_MESSAGE', function (data) {
+    console.log(`Message from ${getUser(socket.id).name}: `, data);
     io.emit('MESSAGE', data);
-    console.log(`Message from ${getUser(socket.id).name}: `, data)
   });
 
   socket.on('disconnect', function () {

@@ -29,17 +29,15 @@
 </template>
 
 <script>
-    import io from 'socket.io-client';
 
     export default {
         data() {
             return {
-                user: '',
+                // user: '',
                 message: '',
                 messages: [],
                 typingUser: '',
                 timeout: '',
-                socket: io('192.168.0.122:3000')
             }
         },
         methods: {
@@ -56,7 +54,7 @@
                 this.user = prompt('Введите логин:', '');
                 this.socket.emit('TAKE_NAME', {
                     user: this.user
-                })
+                });
             },
             checkUserTyping() {
                 clearTimeout(this.timeout);
@@ -67,16 +65,15 @@
             },
         },
         mounted() {
-            this.takeUserName();
-            this.socket.on('TYPING', user => {
-                this.typingUser = user.message;
-            });
-            this.socket.on('MESSAGE', (data) => {
-                console.log(data);
-                this.typingUser = '';
-                this.messages = [...this.messages, data];
-                // you can also do this.messages.push(data)
-            });
+            // this.takeUserName();
+            // this.socket.on('TYPING', user => {
+            //     this.typingUser = user.message;
+            // });
+            // this.socket.on('MESSAGE', (data) => {
+            //     console.log(data);
+            //     this.typingUser = '';
+            //     this.messages = [...this.messages, data];
+            // });
         }
     };
 </script>
